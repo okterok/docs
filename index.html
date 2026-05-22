@@ -225,6 +225,7 @@
         const REPO_OWNER = 'okterok';
         const REPO_NAME = 'docs';
         const API_URL = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`;
+        const EXCLUDED_FILES = ['index.md', 'README.md', 'Cats Blender Plugin.md'];
 
         let filesList = [];
         let currentFile = null;
@@ -236,7 +237,7 @@
                 const data = await response.json();
 
                 filesList = data
-                    .filter(file => file.name.endsWith('.md') && file.name !== 'index.md')
+                    .filter(file => file.name.endsWith('.md') && !EXCLUDED_FILES.includes(file.name))
                     .sort((a, b) => a.name.localeCompare(b.name));
 
                 renderFilesList();
