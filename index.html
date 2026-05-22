@@ -359,11 +359,12 @@
 
                 renderFilesList();
 
-                // Load the first file or check URL hash
+                // Load based on URL hash
                 const hash = window.location.hash.slice(1);
-                const fileToLoad = hash || filesList[0]?.name;
-                if (fileToLoad) {
-                    loadFile(fileToLoad);
+                if (hash) {
+                    loadFile(hash);
+                } else {
+                    loadWelcome();
                 }
             } catch (error) {
                 console.error('Error loading files:', error);
@@ -516,12 +517,7 @@
         });
 
         // Initialize on page load
-        async function init() {
-            await loadFilesList();
-            await loadWelcome();
-        }
-
-        init();
+        loadFilesList();
     </script>
 </body>
 </html>
